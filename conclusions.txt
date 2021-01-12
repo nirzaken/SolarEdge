@@ -1,0 +1,12 @@
+Analyze the results chart and write your conclusions:
+1.  It's easy to see that the max repetitions received by the root node.
+2.  Zero repetitions received by the tree leaves
+3.  Because we ran displayAncestors with values that always fell within the tree range
+    (i.e. we had some information about the tree, we knew that the minimum data is 0 and the maximum is 30),
+    it is possible to develop an algorithm that expands the algorithm in this program to conclude the nodes locations, as follows:
+    After each run of this program we normalize the results (counts / iterations),
+    We will store the information in an array so that each NodeID contain a number between 0-1,
+    We will run the program again, normalize the results, and add them to the previous normalized array of results,
+    This way after a few repetitions of running the program (the more we run the closer we get to the truth),
+    We will go through the normalized array and we can conclude from the values about the shape of the tree and the location of each NodeID
+    (With the accuracy of nodes that are at the same level)
