@@ -16,21 +16,51 @@ class MyTree:
     def deleteTree(self):
         self.root = None
 
-    def printTree(self):
-        if self.root is not None:
-            self._printTree(self.root)
+    def printLevelOrder(self):
+        if self is not None and self.root is not None:
+            self._printLevelOrder(self.root)
+        else:
+            return
 
-    def _printTree(self, node):
-        if node is not None:
-            self._printTree(node.left)
-            print(str(node.data) + ' ')
-            self._printTree(node.right)
+    def _printLevelOrder(self, root):
+        Q = [root]
+        while len(Q) > 0:
+            curr = Q.pop(0)
+            print(curr.data, end=' ')
+            if curr.left is not None:
+                Q.append(curr.left)
+                if curr.right is not None:
+                    Q.append(curr.right)
 
-    def printInorder(self, node):
+    def printInOrder(self):
+        if self is not None and self.root is not None:
+            self._printInOrder(self.root)
+
+    def _printInOrder(self, node):
         if node is not None:
-            self.printInorder(node.left)
-            print(node.data)
-            self.printInorder(node.right)
+            self._printInOrder(node.left)
+            print(node.data, end=' ')
+            self._printInOrder(node.right)
+
+    def printPreOrder(self):
+        if self is not None and self.root is not None:
+            self._printPreOrder(self.root)
+
+    def _printPreOrder(self, node):
+        if node is not None:
+            print(node.data, end=' ')
+            self._printPreOrder(node.left)
+            self._printPreOrder(node.right)
+
+    def printPostOrder(self):
+        if self is not None and self.root is not None:
+            self._printPostOrder(self.root)
+
+    def _printPostOrder(self, node):
+        if node is not None:
+            self._printPostOrder(node.left)
+            self._printPostOrder(node.right)
+            print(node.data, end=' ')
 
     def displayAncestors(self, node, datatofind):
         if node is None:

@@ -1,4 +1,5 @@
 import json
+from builtins import print
 from random import randint
 
 from MongoDBClient import MongoDBClient
@@ -52,18 +53,11 @@ def main():
     COLLECTION = "CountAncestors"
     mongoClient = MongoDBClient(IP, PORT, DB, COLLECTION)
     mongoClient.initDB()
-    if mongoClient is None:
-        return
-    elif mongoClient.myClient is None:
-        return
-    elif mongoClient.myDb is None:
-        return
-    elif mongoClient.myCol is None:
+    if mongoClient is None or mongoClient.myClient is None or mongoClient.myDb is None or mongoClient.myCol is None:
         return
 
     mongoClient.initDB()
     tree = initTree(mongoClient)
-
     ITERATIONS = randint(100, 1000)
 
     randList = [randint(0, 30)]
@@ -80,6 +74,33 @@ def main():
                 ids.append(record[elem])
             else:
                 counts.append(record[elem])
+
+    print("\n-----------------")
+    print("ITERATIONS: " + str(ITERATIONS), end=' ')
+    print("\n-----------------")
+    print("BFS: Level Order::")
+    tree.printLevelOrder()
+    print("\n-----------------")
+    print("DFS: Pre Order::")
+    tree.printPreOrder()
+    print("\n-----------------")
+    print("DFS: In Order::")
+    tree.printInOrder()
+    print("\n-----------------")
+    print("DFS: Post Order::")
+    tree.printPostOrder()
+    print("\n-----------------")
+    print("Counts::")
+    print(counts, end=' ')
+    print("\n-----------------")
+    print("MongoDB: show dbs::")
+    print(mongoClient.myClient.list_database_names())
+    print("MongoDB: use tree; show collections::")
+    print(mongoClient.myDb.list_collection_names())
+    print("MongoDB: db.tree.CountAncestors.find()::")
+    for x in mongoClient.myCol.find():
+        print(x)
+    print("\n-----------------")
 
     myGraph = MyGraph(ids, counts)
     tree.deleteTree()

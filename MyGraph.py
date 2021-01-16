@@ -1,3 +1,6 @@
+import math
+from itertools import count
+
 import plotly.graph_objects as go
 
 
@@ -7,21 +10,34 @@ class MyGraph:
         self.fig = go.Figure()
         self.fig.add_trace(go.Bar(x=nodeIds, y=countAncestors))
 
-        xAxisText = []
-        for i in nodeIds:
-            xAxisText.append(str(i))
+        ITERATIONS = countAncestors[0]
+        countAncestors.remove(countAncestors[0])
+
+        ymax = ITERATIONS + math.floor(ITERATIONS * 0.1)
 
         self.fig.update_layout(
             autosize=True,
+            title=dict(
+                text="Traverse tree histogram:",
+                y=0.99,
+                x=0.5,
+                xanchor="center",
+                yanchor="top",
+                font=dict(size=50)
+            ),
             xaxis=dict(
-                title_text="Node",
-                ticktext=xAxisText,
+                type="category",
                 tickvals=nodeIds,
                 tickmode="array",
-                titlefont=dict(size=30)
+                title=dict(
+                    text="Node",
+                    standoff=10,
+                    font=dict(size=30)
+                )
             ),
             yaxis=dict(
                 title_text="Repetition",
+                range=[0, ymax],
                 titlefont=dict(size=30)
             )
         )

@@ -10,3 +10,29 @@ Analyze the results chart and write your conclusions:
     This way after a few repetitions of running the program (the more we run the closer we get to the truth),
     We will go through the normalized array and we can conclude from the values about the shape of the tree and the location of each NodeID
     (With the accuracy of nodes that are at the same level)
+
+idsList             = [0:30]
+iterations          = 100
+counts              = [  97,  80,  80,  70,  70,  70,  70, ... , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+------------------
+normelizedList#1    = [0.97, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, ... , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+normelizedList#2    = [0.96, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, ... , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+normelizedList#3    = [0.95, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, ... , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+...
+normelizedList#100  = [0.98, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, ... , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+------------------
+sumNormLists        = [97, 80, 80, 70, 70, 70, 70, ... , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+sort sumNormLists (descending order), but keep the indecies, so we can tell what is the location of each NodeId
+                            sorted sumNormLists = [97, 80, 80, 70, 70, 70, 70, ... ,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]
+List of NodeIds after sumNormLists was sorted   = [ 0,  2,  1,  5,  4,  3,  6, ... , 15, 17, 19, 21, 23, 25, 27, 29, 16, 18, 20, 22, 24, 26, 28, 30]
+Create a tree:
+
+                            0
+                /                           \
+             2                                1
+        /           \                   /           \
+      5               4               3               6
+    /   \           /   \           /   \           /   \
+ X30     X31     X32     X33     X34     X35     X36     X37
+/   \   /   \   /   \   /   \   /   \   /   \   /   \   /   \
+15, 17, 19, 21, 23, 25, 27, 29, 16, 18, 20, 22, 24, 26, 28, 30
